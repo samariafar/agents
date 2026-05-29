@@ -1,0 +1,14 @@
+# DevTools
+/.idea/
+/.vscode/
+/.claude/
+
+# Sub-repositories
+/docs/wiki/
+
+# Misc.
+.DS_Store
+Thumbs.db
+desktop.ini
+*.sw?
+*~

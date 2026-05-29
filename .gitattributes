@@ -1,0 +1,11 @@
+*               text eol=lf
+.*              text eol=lf
+
+*.png           binary
+
+*.md            diff=markdown linguist-detectable=true
+*.mrconfig      linguist-language=ini diff=ini
+*.ps1           text eol=crlf
+
+/.github        export-ignore
+/docs           export-ignore
