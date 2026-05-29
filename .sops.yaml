@@ -1,0 +1,23 @@
+# sops + age — encrypted secrets at rest.
+#
+# This repo's only secret is the git-crypt symmetric key, base64-encoded
+# under `git_crypt_key:` in secrets.yaml. The active decryption key is
+# exported via SOPS_AGE_KEY_FILE in home/.profile (default:
+# ~/Vault/Keys/Sam/age-private.key) and lives on a LUKS-encrypted /home,
+# so the LUKS passphrase doubles as the gate around the age key.
+#
+# To rotate or add a recipient:
+#   1. Append the new recipient line under `keys:` below.
+#   2. Re-encrypt:  sops updatekeys secrets.yaml
+
+keys:
+  - &sam age16uh8whw8s6kqpv0wke4qya0fq6cdfq45ffzcajxe5dpm387jnu0qwumkkt
+
+creation_rules:
+  - path_regex: secrets\.yaml$
+    age:
+      - *sam
+
+stores:
+  yaml:
+    indent: 2

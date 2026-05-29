@@ -7,5 +7,8 @@
 *.mrconfig      linguist-language=ini diff=ini
 *.ps1           text eol=crlf
 
+AGENTS.md       filter=git-crypt diff=git-crypt -text
+SKILL.md        filter=git-crypt diff=git-crypt -text
+
 /.github        export-ignore
 /docs           export-ignore
