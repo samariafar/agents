@@ -1,0 +1,127 @@
+{
+  "version": 3,
+  "skills": {
+    "next-best-practices": {
+      "source": "vercel-labs/next-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/next-skills.git",
+      "skillPath": "skills/next-best-practices/SKILL.md",
+      "skillFolderHash": "a236d702277c5364cf6f540712a8dddb46e79a46",
+      "installedAt": "2026-05-19T16:39:27.404Z",
+      "updatedAt": "2026-05-19T16:39:27.404Z"
+    },
+    "next-cache-components": {
+      "source": "vercel-labs/next-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/next-skills.git",
+      "skillPath": "skills/next-cache-components/SKILL.md",
+      "skillFolderHash": "a6f29564b9228af553737bd437c7016fc3dc44e0",
+      "installedAt": "2026-05-19T16:40:00.829Z",
+      "updatedAt": "2026-05-19T16:40:00.829Z"
+    },
+    "next-upgrade": {
+      "source": "vercel-labs/next-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/next-skills.git",
+      "skillPath": "skills/next-upgrade/SKILL.md",
+      "skillFolderHash": "962598faa417cf3b6c03ec2e5cbe0aa0aeb2c4a9",
+      "installedAt": "2026-05-19T16:40:02.364Z",
+      "updatedAt": "2026-05-19T16:40:02.364Z"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "skillFolderHash": "343db72180d05814949fef7d46be96b5c6ee86b3",
+      "installedAt": "2026-05-19T16:40:04.069Z",
+      "updatedAt": "2026-05-19T16:40:04.069Z"
+    },
+    "vercel-composition-patterns": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/composition-patterns/SKILL.md",
+      "skillFolderHash": "bf90d0a4b83ea054653350f9c67f6de235d3a368",
+      "installedAt": "2026-05-19T16:40:05.243Z",
+      "updatedAt": "2026-05-19T16:40:05.243Z"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "skillFolderHash": "3116f3e62dbd02b44a598b1aa690d2a8938e8f89",
+      "installedAt": "2026-05-19T16:40:06.209Z",
+      "updatedAt": "2026-05-19T16:40:06.209Z"
+    },
+    "vercel-react-native-skills": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/react-native-skills/SKILL.md",
+      "skillFolderHash": "8b4c6a51914e2111ab6f4f00cb81778652aa241d",
+      "installedAt": "2026-05-19T16:40:07.852Z",
+      "updatedAt": "2026-05-19T16:40:07.852Z"
+    },
+    "figma-implement-design": {
+      "source": "openai/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/openai/skills.git",
+      "skillPath": "skills/.curated/figma-implement-design/SKILL.md",
+      "skillFolderHash": "122e36f32ef3fc85374d70c4fb62a83861816e40",
+      "installedAt": "2026-05-19T16:40:13.062Z",
+      "updatedAt": "2026-05-19T16:40:13.062Z"
+    },
+    "mcp-builder": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/anthropics/skills.git",
+      "skillPath": "skills/mcp-builder/SKILL.md",
+      "skillFolderHash": "b866bcfb57b780c10b587c7b543e871a91661ce0",
+      "pluginName": "example-skills",
+      "installedAt": "2026-05-19T16:40:20.945Z",
+      "updatedAt": "2026-05-19T16:40:20.945Z"
+    },
+    "pptx": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/anthropics/skills.git",
+      "skillPath": "skills/pptx/SKILL.md",
+      "skillFolderHash": "10b3d70962e489867ddfee7da92f7da6b0eccc4f",
+      "pluginName": "document-skills",
+      "installedAt": "2026-05-19T16:42:58.282Z",
+      "updatedAt": "2026-05-19T16:42:58.282Z"
+    },
+    "xlsx": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/anthropics/skills.git",
+      "skillPath": "skills/xlsx/SKILL.md",
+      "skillFolderHash": "f5fb1cdb7993b2feee8367e983e9d4d58d2eedd4",
+      "pluginName": "document-skills",
+      "installedAt": "2026-05-19T16:43:03.207Z",
+      "updatedAt": "2026-05-19T16:43:03.207Z"
+    },
+    "pdf": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/anthropics/skills.git",
+      "skillPath": "skills/pdf/SKILL.md",
+      "skillFolderHash": "6369f4649de69bd6857c9bc3b058a77206009238",
+      "pluginName": "document-skills",
+      "installedAt": "2026-05-19T16:43:07.410Z",
+      "updatedAt": "2026-05-19T16:43:07.410Z"
+    },
+    "sentry-workflow": {
+      "source": "getsentry/sentry-for-ai",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/getsentry/sentry-for-ai.git",
+      "skillPath": "skills/sentry-workflow/SKILL.md",
+      "skillFolderHash": "ddc12021843cb7273846f7aaf6f6f63c4ead3062",
+      "installedAt": "2026-05-19T16:43:11.575Z",
+      "updatedAt": "2026-05-19T16:43:11.575Z"
+    }
+  },
+  "dismissed": {}
+}
