@@ -1,0 +1,17 @@
+# Ignore every entry in this directory by default.
+# Skills installed externally (e.g. via `bunx skills add`) land here at runtime
+# and must not be committed — they belong to their upstream publishers and
+# are restored on demand, not vendored.
+*
+
+# Keep this file itself.
+!.gitignore
+
+# Re-include project-authored skills (the ones maintained in this repo).
+!code-style/
+!git/
+!github/
+!licenses/
+!makefile/
+!readme/
+!tech-stack/
