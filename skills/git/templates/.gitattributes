@@ -1,0 +1,6 @@
+*               text eol=lf
+.*              text eol=lf
+
+/.github        export-ignore
+/docs           export-ignore
+/CHANGELOG.md   export-ignore
