@@ -6,6 +6,13 @@
 # Sub-repositories
 /docs/wiki/
 
+# Environment Files
+/.direnv/
+
+# Nix
+result
+result-*
+
 # Misc.
 .DS_Store
 Thumbs.db
