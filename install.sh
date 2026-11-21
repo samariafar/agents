@@ -1,24 +1,28 @@
 #!/usr/bin/env bash
 #
 # install.sh — symlink this agents repository into the dotfile directories
-# read by Claude Code (~/.claude), OpenAI Codex CLI (~/.codex), and Gemini CLI
-# (~/.gemini). Linux + macOS. NixOS users: use the flake's Home-Manager module
-# instead — see README.md.
+# read by OpenAI Codex CLI (~/.codex), Claude Code (~/.claude), OpenCode
+# (~/.config/opencode) and Gemini CLI (~/.gemini). Linux + macOS. NixOS users:
+# use the flake's Home-Manager module instead — see the wiki's Installation
+# page (docs/wiki/Installation.md).
 
 set -euo pipefail
 
 usage() {
 	cat <<-EOF
-		Usage: ${0##*/} [--force] [--uninstall] [--help]
+		Usage: ${0##*/} [--force] [--uninstall] [--no-sync] [--help]
 
 		Symlinks the agents repository into the dotfile directories of the
-		AI coding CLIs (Claude Code, OpenAI Codex, Gemini) under \$HOME.
+		AI coding CLIs (OpenAI Codex, Claude Code, OpenCode, Gemini) under \$HOME.
 
 		Options:
 		  --force      Replace existing non-symlink files (originals are backed
 		               up to <path>.bak-<UTC-timestamp> first).
 		  --uninstall  Remove only the links that point into this repo. Other
-		               files under ~/.claude, ~/.codex, ~/.gemini are left alone.
+		               files under ~/.codex, ~/.claude, ~/.config/opencode and
+		               ~/.gemini are left alone.
+		  --no-sync    Only create links; skip applying mcp/servers.json and
+		               the plugins in settings.json (run \`agents-sync\` later).
 		  --help, -h   Show this help and exit.
 	EOF
 }
@@ -121,12 +125,15 @@ LINKS=(
 	"settings.json|.claude/settings.json"
 	"skills|.claude/skills"
 	"AGENTS.md|.codex/AGENTS.md"
+	"AGENTS.md|.config/opencode/AGENTS.md"
 	"AGENTS.md|.gemini/GEMINI.md"
+	"sync.mjs|.local/bin/agents-sync"
 )
 
 REPO_DIR=""
 FORCE=0
 UNINSTALL=0
+SYNC=1
 
 backup_path_for() {
 	local path="$1"
@@ -217,6 +224,24 @@ do_install() {
 	ok "install complete."
 }
 
+# Applies mcp/servers.json and the plugins in settings.json via sync.mjs (also
+# on PATH as `agents-sync`, see LINKS). Needs Node; skipped with a warning
+# otherwise.
+# Failures warn instead of failing the install: the links are already done.
+do_sync() {
+	if ! command -v node >/dev/null 2>&1; then
+		warn "node not found; skipping MCP/plugin sync (install Node, then run: agents-sync mcp sync)"
+		return 0
+	fi
+	log "syncing MCP servers and plugins"
+	node "${REPO_DIR}/sync.mjs" mcp sync || warn "MCP sync failed; re-run: agents-sync mcp sync"
+	node "${REPO_DIR}/sync.mjs" plugins sync || warn "plugin sync failed; re-run: agents-sync plugins sync"
+	case ":${PATH}:" in
+		*":${HOME}/.local/bin:"*) ;;
+		*) warn "~/.local/bin is not on PATH; add it to use the agents-sync command" ;;
+	esac
+}
+
 do_uninstall() {
 	local entry rel_src rel_dst
 	for entry in "${LINKS[@]}"; do
@@ -232,6 +257,7 @@ main() {
 		case "$1" in
 			--force)     FORCE=1 ;;
 			--uninstall) UNINSTALL=1 ;;
+			--no-sync)   SYNC=0 ;;
 			--help|-h)   usage; exit 0 ;;
 			*)
 				err "unknown option: $1"
@@ -257,6 +283,7 @@ main() {
 	else
 		ensure_unlocked
 		do_install
+		(( SYNC )) && do_sync
 	fi
 }
 

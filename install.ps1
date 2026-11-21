@@ -2,7 +2,8 @@
 <#
 .SYNOPSIS
     Symlinks the agents repository into the dotfile directories read by
-    Claude Code, OpenAI Codex CLI, and Gemini CLI under %USERPROFILE%.
+    OpenAI Codex CLI, Claude Code, OpenCode and Gemini CLI under
+    %USERPROFILE%.
 
 .DESCRIPTION
     Idempotent. Re-running with no flags is a no-op when all links are
@@ -15,13 +16,18 @@
 
 .PARAMETER Uninstall
     Remove only the links this script created (links whose target points
-    into this repository). All other files under ~/.claude, ~/.codex,
-    ~/.gemini are left untouched.
+    into this repository). All other files under ~/.codex, ~/.claude,
+    ~/.config/opencode and ~/.gemini are left untouched.
+
+.PARAMETER NoSync
+    Only create links; skip applying mcp/servers.json and the plugins in
+    settings.json (run `node ~/.agents/sync.mjs` later).
 #>
 [CmdletBinding()]
 param(
     [switch]$Force,
-    [switch]$Uninstall
+    [switch]$Uninstall,
+    [switch]$NoSync
 )
 
 Set-StrictMode -Version Latest
@@ -87,6 +93,7 @@ $Links = @(
     @{ Source = 'settings.json'; Link = '.claude\settings.json' },
     @{ Source = 'skills';        Link = '.claude\skills'        },
     @{ Source = 'AGENTS.md';     Link = '.codex\AGENTS.md'      },
+    @{ Source = 'AGENTS.md';     Link = '.config\opencode\AGENTS.md' },
     @{ Source = 'AGENTS.md';     Link = '.gemini\GEMINI.md'     }
 )
 
@@ -224,6 +231,22 @@ try {
             exit 1
         }
         Write-Ok 'install complete.'
+
+        # Apply mcp/servers.json and the plugins in settings.json (same sync.mjs as install.sh).
+        # Failures warn instead of failing the install: the links are done.
+        if (-not $NoSync) {
+            $sync = Join-Path -Path $RepoDir -ChildPath 'sync.mjs'
+            if (Get-Command node -ErrorAction SilentlyContinue) {
+                Write-Info 'syncing MCP servers and plugins'
+                foreach ($syncArgs in @(@('mcp', 'sync'), @('plugins', 'sync'))) {
+                    & node $sync @syncArgs
+                    if ($LASTEXITCODE -ne 0) { Write-Warn "sync failed; re-run: node `"$sync`" $($syncArgs -join ' ')" }
+                }
+            }
+            else {
+                Write-Warn "node not found; skipping MCP/plugin sync (install Node, then run: node `"$sync`" mcp sync)"
+            }
+        }
     }
 }
 catch {

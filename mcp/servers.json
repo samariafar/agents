@@ -1,0 +1,74 @@
+{
+  "$comment": "SSoT for MCP servers across all agents. `agents-sync mcp sync` writes scope=global servers into every agent's user config (Codex, Claude Code, OpenCode, Gemini CLI; Hermes via the flake's lib.mcpServers); scope=project servers are opt-in per repo via `agents-sync mcp enable <name>`. `skip` lists agents that get the server another way (e.g. a Claude Code plugin from settings.json). No secrets here: OAuth logins live in each agent's own store, API keys in sops. Must stay unencrypted: the flake reads it at evaluation time.",
+  "servers": {
+    "browse": {
+      "scope": "global",
+      "description": "Drive the user's real Chrome-family browser (logins, tabs) via the browse extension.",
+      "command": "~/.local/bin/browse",
+      "args": [
+        "mcp"
+      ],
+      "skip": [
+        "hermes"
+      ]
+    },
+    "cloudflare-docs": {
+      "scope": "global",
+      "description": "Search Cloudflare documentation.",
+      "url": "https://docs.mcp.cloudflare.com/mcp",
+      "skip": [
+        "claude"
+      ]
+    },
+    "cloudflare-api": {
+      "scope": "global",
+      "description": "Cloudflare API in code mode (search + execute; covers the whole API with two tools).",
+      "url": "https://mcp.cloudflare.com/mcp",
+      "auth": "oauth",
+      "skip": [
+        "claude"
+      ]
+    },
+    "cloudflare-bindings": {
+      "scope": "project",
+      "description": "Workers bindings: KV, R2, D1, Hyperdrive.",
+      "url": "https://bindings.mcp.cloudflare.com/mcp",
+      "auth": "oauth",
+      "skip": [
+        "claude"
+      ]
+    },
+    "cloudflare-builds": {
+      "scope": "project",
+      "description": "Workers Builds: deployments and build logs.",
+      "url": "https://builds.mcp.cloudflare.com/mcp",
+      "auth": "oauth",
+      "skip": [
+        "claude"
+      ]
+    },
+    "cloudflare-observability": {
+      "scope": "project",
+      "description": "Workers logs and analytics.",
+      "url": "https://observability.mcp.cloudflare.com/mcp",
+      "auth": "oauth",
+      "skip": [
+        "claude"
+      ]
+    },
+    "stripe": {
+      "scope": "project",
+      "description": "Stripe account, payments and docs.",
+      "url": "https://mcp.stripe.com",
+      "auth": "oauth",
+      "skip": [
+        "claude"
+      ]
+    },
+    "reui": {
+      "scope": "project",
+      "description": "ReUI components, blocks and agent skill (projects whose UI stack is ReUI on shadcn/ui).",
+      "url": "https://mcp.reui.io/api/mcp"
+    }
+  }
+}
